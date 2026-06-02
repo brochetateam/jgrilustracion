@@ -120,8 +120,12 @@
       card.setAttribute("data-index", i);
       card.innerHTML =
         '<img src="' + p.thumbnail + '" alt="' + p.title + '" loading="lazy">' +
-        '<div class="carousel-card-overlay"></div>' +
-        '<div class="carousel-card-title">' + p.title + '</div>';
+        '<div class="carousel-card-title">' + p.title + '</div>' +
+        '<div class="card-meta">' +
+          '<span class="card-category">' + p.category + '</span>' +
+          '<span class="card-count">' + p.images.length + ' imágenes</span>' +
+        '</div>' +
+        '<div class="card-desc">' + p.description + '</div>';
       card.addEventListener("click", function (e) {
         e.stopPropagation();
         openLightbox(i);
@@ -237,9 +241,11 @@
       if (!wasOpen) {
         state.portfolio = true;
         item.classList.add("expanded-portfolio");
-        setTimeout(function () {
-          item.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 750);
+        if (window.matchMedia("(min-width: 601px)").matches) {
+          setTimeout(function () {
+            item.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 750);
+        }
       }
     });
 
