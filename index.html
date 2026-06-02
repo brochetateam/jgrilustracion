@@ -3,231 +3,140 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Julio Garzón Reina - Ilustrador, Concept Artist y Modelador 3D. Portfolio profesional de arte y diseño.">
-  <title>Julio Garzón | Portfolio</title>
+  <meta name="description" content="Julio Garzón Reina - Modelador 3D, ilustrador y concept artist. Portfolio profesional de arte y diseño.">
+  <title>Julio Garzón | Illustrator · Concept Artist · 3D</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Karla:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="#hero" class="nav-logo">JG</a>
-      <button class="nav-toggle" id="navToggle" aria-label="Menú">
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="nav-menu" id="navMenu">
-        <li><a href="#about">Sobre mí</a></li>
-        <li><a href="#skills">Habilidades</a></li>
-        <li><a href="#gallery">Trabajos</a></li>
-        <li><a href="#experience">Experiencia</a></li>
-        <li><a href="#contact">Contacto</a></li>
-      </ul>
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>ILLUSTRATION · CONCEPT ART · 3D MODELING · CHARACTER DESIGN · CREATURE DESIGN · ENVIRONMENT DESIGN · </span>
+      <span>ILLUSTRATION · CONCEPT ART · 3D MODELING · CHARACTER DESIGN · CREATURE DESIGN · ENVIRONMENT DESIGN · </span>
+      <span>ILLUSTRATION · CONCEPT ART · 3D MODELING · CHARACTER DESIGN · CREATURE DESIGN · ENVIRONMENT DESIGN · </span>
+      <span>ILLUSTRATION · CONCEPT ART · 3D MODELING · CHARACTER DESIGN · CREATURE DESIGN · ENVIRONMENT DESIGN · </span>
     </div>
-  </nav>
+  </div>
 
   <section class="hero" id="hero">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <h1 class="hero-title">
-        <span class="hero-title-main">Julio</span>
-        <span class="hero-title-last">Garzón</span>
-      </h1>
-      <p class="hero-subtitle">Ilustrador · Concept Artist · Modelador 3D</p>
-      <p class="hero-tagline">Creando mundos, personajes y criaturas con arte digital</p>
-      <div class="hero-actions">
-        <a href="#gallery" class="btn btn-primary">Ver trabajos</a>
-        <a href="#contact" class="btn btn-secondary">Contactar</a>
-      </div>
-    </div>
-    <div class="hero-scroll">
-      <span>Desplázate</span>
-      <div class="scroll-line"></div>
+    <h1 class="hero-name" aria-label="Julio Garzón">
+      <span class="line line-1">
+        <span class="letter">J</span><span class="letter">U</span><span class="letter">L</span><span class="letter">I</span><span class="letter">O</span>
+      </span>
+      <span class="line line-2">
+        <span class="letter">G</span><span class="letter">A</span><span class="letter">R</span><span class="letter">Z</span><span class="shape-pill" aria-hidden="true"><span class="shape-circle"></span></span><span class="letter">N</span>
+      </span>
+    </h1>
+    <div class="hero-tagline">
+      <span class="pill">ILLUSTRATION · CONCEPT ART · 3D · RPG FANTASY</span>
     </div>
   </section>
 
-  <section class="about section" id="about">
-    <div class="container">
-      <div class="about-grid">
-        <div class="about-image">
-          <div class="about-image-frame">
-            <img src="https://cdnb.artstation.com/p/users/avatars/001/245/931/large/963c92ac6eb98d9a98151c2a0de86c78.jpg?1556282638" alt="Julio Garzón">
-          </div>
-          <div class="about-social">
-            <a href="https://www.artstation.com/juliogr94" target="_blank" rel="noopener" class="social-link" aria-label="ArtStation">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2.4c5.302 0 9.6 4.298 9.6 9.6s-4.298 9.6-9.6 9.6S2.4 17.302 2.4 12 6.698 2.4 12 2.4zm-1.44 5.28l-2.88 7.44h1.68l.6-1.68h3.12l.6 1.68h1.68l-2.88-7.44H10.56zm0 2.4l1.2 3.36H11l1.2-3.36h.48l1.2 3.36H11l1.2-3.36z"/></svg>
-            </a>
-            <a href="https://www.instagram.com/jgrilustracion/" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.4c3.2 0 3.6 0 4.9.1 1.2.1 2 .2 2.7.5.7.3 1.3.7 1.9 1.3.6.6 1 1.2 1.3 1.9.3.7.4 1.5.5 2.7.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 2-.5 2.7-.3.7-.7 1.3-1.3 1.9-.6.6-1.2 1-1.9 1.3-.7.3-1.5.4-2.7.5-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-2-.2-2.7-.5-.7-.3-1.3-.7-1.9-1.3-.6-.6-1-1.2-1.3-1.9-.3-.7-.4-1.5-.5-2.7-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.2-2 .5-2.7.3-.7.7-1.3 1.3-1.9.6-.6 1.2-1 1.9-1.3.7-.3 1.5-.4 2.7-.5 1.3-.1 1.7-.1 4.9-.1zM12 0C8.7 0 8.3 0 7 .1 5.7.2 4.8.4 4 .7c-.8.4-1.5.8-2.2 1.5C1 3 0.6 3.8 0.3 4.6 0 5.4-.1 6.3-.2 7.6-.3 8.9-.3 9.3-.3 12.6s0 3.7.1 5c.1 1.3.2 2.2.5 3 .4.8.8 1.5 1.5 2.2.6.6 1.4 1.1 2.2 1.5.8.3 1.7.5 3 .5 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.3-.1 2.2-.2 3-.5.8-.4 1.5-.8 2.2-1.5.6-.6 1.1-1.4 1.5-2.2.3-.8.5-1.7.5-3 .1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.3-.2-2.2-.5-3-.4-.8-.8-1.5-1.5-2.2-.6-.6-1.4-1.1-2.2-1.5-.8-.3-1.7-.5-3-.5C15.7 0 15.3 0 12 0zm0 5.8c-3.4 0-6.2 2.8-6.2 6.2s2.8 6.2 6.2 6.2 6.2-2.8 6.2-6.2-2.8-6.2-6.2-6.2zm0 10.2c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4zm6.4-10.6c0 .8-.6 1.4-1.4 1.4s-1.4-.6-1.4-1.4.6-1.4 1.4-1.4 1.4.6 1.4 1.4z"/></svg>
-            </a>
-            <a href="https://twitter.com/JGRilustracion" target="_blank" rel="noopener" class="social-link" aria-label="Twitter">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.2 2.2h3.3l-7.2 8.2 8.4 11.1h-6.6l-5.2-6.8-5.9 6.8H1.7l7.7-8.8L1.5 2.2h6.8l4.7 6.2 5.4-6.2zm-1.2 17.6h1.8L7.1 4.1H5.2l11.8 15.7z"/></svg>
-            </a>
-            <a href="mailto:jgrilustracion@gmail.com" class="social-link" aria-label="Email">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-            </a>
-          </div>
+  <section class="about" id="about">
+    <h2 class="section-name" aria-label="About">
+      <span class="side">AB</span>
+      <span class="circle-bio" aria-label="About me">
+        <p>Hola, soy Julio.</p>
+        <p>Artista 2D y 3D afincado en Málaga, España. Apasionado de la ilustración y los proyectos de videojuegos.</p>
+        <p>Actualmente trabajo como 3D Artist en VOSON ENGINE y busco colaboraciones interesantes como freelance.</p>
+        <p>Déjame ayudarte a contar tu historia.</p>
+      </span>
+      <span class="side">UT</span>
+    </h2>
+  </section>
+
+  <section class="portfolio" id="portfolio">
+    <h2 class="section-name" aria-label="Portfolio">
+      <span class="side">P</span><span class="side">ORTF</span><span class="shape-pill" aria-hidden="true"><span class="shape-circle"></span></span><span class="side">LIO</span>
+    </h2>
+
+    <div class="projects-rail">
+      <article class="project">
+        <div class="project-image" style="background-image:url('https://cdna.artstation.com/p/assets/covers/images/086/990/136/smaller_square/julio-garzon-julio-garzon-icono.jpg?1744627706')"></div>
+        <div class="project-meta">
+          <h3>Boss Demon</h3>
+          <p>Zombie Survival</p>
         </div>
-        <div class="about-text">
-          <h2 class="section-title">Sobre mí</h2>
-          <div class="section-divider"></div>
-          <p class="about-bio">
-            ¡Hola! Soy Julio, artista 2D y 3D afincado en Málaga, España. 
-            Me apasiona la ilustración y los proyectos de videojuegos. 
-            Actualmente busco proyectos para trabajar como freelance.
-          </p>
-          <p class="about-bio">
-            Trabajé como <strong>Lead Artist en Estudio Ábrego</strong> durante más de 3 años, 
-            siendo el diseñador de personajes y el concept artist principal del proyecto Noahmund. 
-            También participé en el <strong>Proyecto BlackSong</strong> como Character y Creature Designer, 
-            desarrollando un prototipo ARPG en Pixel Art.
-          </p>
-          <div class="about-stats">
-            <div class="stat">
-              <span class="stat-number">7+</span>
-              <span class="stat-label">Años de experiencia</span>
-            </div>
-            <div class="stat">
-              <span class="stat-number">3+</span>
-              <span class="stat-label">Proyectos destacados</span>
-            </div>
-            <div class="stat">
-              <span class="stat-number">2D/3D</span>
-              <span class="stat-label">Artista multidisciplinar</span>
-            </div>
-          </div>
+      </article>
+
+      <article class="project">
+        <div class="project-image" style="background-image:url('https://cdna.artstation.com/p/assets/covers/images/086/328/880/smaller_square/julio-garzon-julio-garzon-icono.jpg?1742923730')"></div>
+        <div class="project-meta">
+          <h3>Zombie Doberman</h3>
+          <p>Diseño de criatura</p>
         </div>
-      </div>
+      </article>
+
+      <article class="project">
+        <div class="project-image" style="background-image:url('https://cdna.artstation.com/p/assets/covers/images/086/328/114/smaller_square/julio-garzon-julio-garzon-icono.jpg?1742921683')"></div>
+        <div class="project-meta">
+          <h3>Zombie Rat</h3>
+          <p>Diseño de criatura</p>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-image" style="background-image:url('https://cdnb.artstation.com/p/assets/images/images/086/647/977/smaller_square/julio-garzon-character-toypark-robot.jpg?1743697589')"></div>
+        <div class="project-meta">
+          <h3>Toy Escape</h3>
+          <p>Personajes y armas 3D</p>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-image" style="background-image:url('https://cdnb.artstation.com/p/assets/covers/images/086/388/113/smaller_square/julio-garzon-julio-garzon-icono.jpg?1743077342')"></div>
+        <div class="project-meta">
+          <h3>Survival Weapons</h3>
+          <p>Glock · HK · M-16</p>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-image" style="background-image:url('https://cdnb.artstation.com/p/assets/covers/images/057/514/027/smaller_square/julio-garzon-julio-garzon-icono.jpg?1671799216')"></div>
+        <div class="project-meta">
+          <h3>Dear Rotten Land</h3>
+          <p>Ilustración</p>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-image" style="background-image:url('https://cdna.artstation.com/p/assets/covers/images/017/514/574/20190426081301/smaller_square/julio-garzon-ranaronina.jpg?1556284381')"></div>
+        <div class="project-meta">
+          <h3>Japanese Medieval</h3>
+          <p>Diseño anfibio</p>
+        </div>
+      </article>
     </div>
   </section>
 
-  <section class="skills section" id="skills">
-    <div class="container">
-      <h2 class="section-title centered">Habilidades</h2>
-      <div class="section-divider centered"></div>
-      <p class="section-desc">Especializado en arte conceptual, modelado 3D e ilustración</p>
-      <div class="skills-grid">
-        <div class="skill-category">
-          <h3>Arte 2D</h3>
-          <ul>
-            <li>Concept Art</li>
-            <li>Ilustración Digital</li>
-            <li>Diseño de Personajes</li>
-            <li>Diseño de Criaturas</li>
-            <li>Diseño de Entornos</li>
-            <li>Arte Tradicional</li>
-            <li>Animación 2D</li>
-          </ul>
-        </div>
-        <div class="skill-category">
-          <h3>Modelado 3D</h3>
-          <ul>
-            <li>Modelado de Personajes</li>
-            <li>Modelado de Entornos</li>
-            <li>Escultura Digital</li>
-            <li>Texturizado</li>
-            <li>Retopología</li>
-          </ul>
-        </div>
-        <div class="skill-category">
-          <h3>Software</h3>
-          <ul>
-            <li><span class="skill-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></span> ZBrush</li>
-            <li><span class="skill-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14zM9 8h2v8H9zm4 0h2v8h-2z"/></svg></span> 3ds Max</li>
-            <li><span class="skill-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg></span> Substance Painter</li>
-            <li>Photoshop</li>
-            <li>Illustrator</li>
-            <li>Unity</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="gallery section" id="gallery">
-    <div class="container">
-      <h2 class="section-title centered">Trabajos</h2>
-      <div class="section-divider centered"></div>
-      <p class="section-desc">Selección de proyectos de ilustración y modelado 3D</p>
-      <div class="gallery-filters">
-        <button class="filter-btn active" data-filter="all">Todos</button>
-        <button class="filter-btn" data-filter="2d">2D / Concept</button>
-        <button class="filter-btn" data-filter="3d">3D</button>
-      </div>
-      <div class="gallery-grid" id="galleryGrid">
-      </div>
-    </div>
-  </section>
-
-  <section class="experience section" id="experience">
-    <div class="container">
-      <h2 class="section-title centered">Experiencia</h2>
-      <div class="section-divider centered"></div>
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <span class="timeline-date">Feb 2016 - Presente</span>
-            <h3>Lead Artist</h3>
-            <h4>Estudio Ábrego · Málaga, España</h4>
-            <p>Diseñador de personajes y怪物 en Noahmund. Responsable del arte conceptual principal y dirección artística del proyecto.</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <span class="timeline-date">2015 - 2016</span>
-            <h3>Character & Creature Designer</h3>
-            <h4>Proyecto BlackSong</h4>
-            <p>Diseño de personajes y criaturas para un prototipo ARPG en Pixel Art.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="contact section" id="contact">
-    <div class="container">
-      <h2 class="section-title centered">Contacto</h2>
-      <div class="section-divider centered"></div>
-      <p class="section-desc">¿Tienes un proyecto en mente? Hablemos</p>
-      <div class="contact-content">
-        <div class="contact-info">
-          <div class="contact-item">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-            <a href="mailto:jgrilustracion@gmail.com">jgrilustracion@gmail.com</a>
-          </div>
-          <div class="contact-item">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-            <span>Málaga, España</span>
-          </div>
-          <div class="contact-links">
-            <a href="https://www.artstation.com/juliogr94" target="_blank" rel="noopener" class="btn btn-outline">ArtStation</a>
-            <a href="https://www.instagram.com/jgrilustracion/" target="_blank" rel="noopener" class="btn btn-outline">Instagram</a>
-            <a href="https://www.linkedin.com/in/juliogarzonreina" target="_blank" rel="noopener" class="btn btn-outline">LinkedIn</a>
-          </div>
-        </div>
-        <form class="contact-form" id="contactForm">
-          <input type="text" placeholder="Nombre" required>
-          <input type="email" placeholder="Email" required>
-          <textarea placeholder="Mensaje" rows="5" required></textarea>
-          <button type="submit" class="btn btn-primary">Enviar mensaje</button>
-        </form>
-      </div>
+  <section class="contact" id="contact">
+    <h2 class="section-name contact-name" aria-label="Contact">
+      <span class="side">C</span><span class="shape-pill contact-pill"><span class="contact-text">HOW CAN I HELP?</span></span><span class="side">NTACT</span>
+    </h2>
+    <p class="contact-info">
+      Escríbeme a <a href="mailto:jgrilustracion@gmail.com">jgrilustracion@gmail.com</a>, o encuéntrame en LinkedIn.
+    </p>
+    <div class="social-icons">
+      <a href="https://www.artstation.com/juliogr94" target="_blank" rel="noopener" aria-label="ArtStation">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-1.44 5.28l2.88 7.44h-1.68l-.6-1.68H10.56l-.6 1.68H8.32l2.88-7.44h.36zm0 2.4l-1.2 3.36h2.4l-1.2-3.36zm5.04 5.04h-3.36v-1.92h3.36v1.92zm-.24-5.04l-1.92 7.44h-2.4l-1.92-7.44h1.68l1.44 5.76 1.44-5.76h1.68z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/jgrilustracion/" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.584.016 4.85.07 1.17.054 1.805.247 2.227.41.56.218.96.479 1.382.9.42.422.682.822.9 1.382.163.422.356 1.057.41 2.227.054 1.266.07 1.65.07 4.85s-.016 3.584-.07 4.85c-.054 1.17-.247 1.805-.41 2.227a3.713 3.713 0 0 1-.9 1.382c-.422.42-.822.682-1.382.9-.422.163-1.057.356-2.227.41-1.266.054-1.65.07-4.85.07s-3.584-.016-4.85-.07c-1.17-.054-1.805-.247-2.227-.41a3.713 3.713 0 0 1-1.382-.9 3.713 3.713 0 0 1-.9-1.382c-.163-.422-.356-1.057-.41-2.227C2.176 15.584 2.16 15.2 2.16 12s.016-3.584.07-4.85c.054-1.17.247-1.805.41-2.227.218-.56.479-.96.9-1.382.422-.42.822-.682 1.382-.9.422-.163 1.057-.356 2.227-.41C8.416 2.176 8.8 2.16 12 2.16M12 0C8.741 0 8.332.014 7.052.072 5.775.13 4.902.333 4.14.63a5.876 5.876 0 0 0-2.126 1.384A5.882 5.882 0 0 0 .63 4.14C.333 4.902.13 5.775.072 7.052.014 8.332 0 8.741 0 12s.014 3.668.072 4.948c.058 1.277.261 2.15.558 2.913a5.89 5.89 0 0 0 1.384 2.126A5.882 5.882 0 0 0 4.14 23.37c.762.297 1.635.5 2.913.558C8.332 23.986 8.741 24 12 24s3.668-.014 4.948-.072c1.277-.058 2.15-.261 2.913-.558a5.898 5.898 0 0 0 2.126-1.384 5.88 5.88 0 0 0 1.384-2.126c.296-.762.5-1.635.558-2.913.058-1.28.072-1.689.072-4.948s-.014-3.668-.072-4.948c-.058-1.277-.262-2.15-.558-2.913a5.89 5.89 0 0 0-1.384-2.126A5.847 5.847 0 0 0 19.86.63c-.762-.297-1.635-.5-2.913-.558C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+      </a>
+      <a href="https://es.linkedin.com/in/juliogarzonreina" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.063 2.063 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <a href="https://twitter.com/JGRilustracion" target="_blank" rel="noopener" aria-label="Twitter">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
     </div>
   </section>
 
   <footer class="footer">
-    <div class="container">
-      <p>&copy; 2026 Julio Garzón Reina. Todos los derechos reservados.</p>
-      <div class="footer-links">
-        <a href="https://www.artstation.com/juliogr94" target="_blank" rel="noopener">ArtStation</a>
-        <a href="https://www.instagram.com/jgrilustracion/" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://twitter.com/JGRilustracion" target="_blank" rel="noopener">Twitter</a>
-      </div>
-    </div>
+    <p>© Julio Garzón 2026</p>
   </footer>
 
   <script src="js/main.js"></script>
