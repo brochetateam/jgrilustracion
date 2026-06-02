@@ -188,6 +188,10 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
   background:rgba(255,255,255,0.50);
 }
 
+.menu-item.expanded-portfolio:hover{
+  background:transparent;
+}
+
 .menu-word{
   display:inline-flex;
   align-items:center;
@@ -334,7 +338,9 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
   max-height:0;
   overflow:hidden;
   transition:max-height .8s var(--ease);
-  width:90vw;
+  width:100vw;
+  margin-left:-2rem;
+  margin-right:-2rem;
 }
 
 .expanded-portfolio .portfolio-carousel-container{
@@ -348,9 +354,8 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
   height:66vh;
   overflow-x:auto;
   overflow-y:hidden;
-  scroll-snap-type:x mandatory;
   align-items:stretch;
-  padding:1.5rem 1rem;
+  padding:1.5rem 0;
   -ms-overflow-style:none;
   scrollbar-width:none;
 }
@@ -365,25 +370,15 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
   overflow:hidden;
   position:relative;
   cursor:pointer;
-  scroll-snap-align:center;
-  transition:flex .4s var(--ease), min-width .4s var(--ease);
   background:var(--black);
-}
-
-.carousel-card:hover{
-  flex:0 0 450px;
-  min-width:450px;
+  will-change:transform;
+  contain:layout style;
 }
 
 .carousel-card img{
   width:100%;
   height:100%;
   object-fit:cover;
-  transition:transform .4s var(--ease);
-}
-
-.carousel-card:hover img{
-  transform:scale(1.05);
 }
 
 .carousel-card-overlay{
@@ -409,10 +404,6 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
   transition:opacity .3s var(--ease);
   text-align:center;
   z-index:2;
-}
-
-.carousel-card:hover .carousel-card-title{
-  opacity:1;
 }
 
 .menu-circle-contact{
@@ -641,8 +632,7 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
   .expanded-portfolio .menu-pill{width:35vw;height:11vw}
   .expanded-contact .menu-circle-contact{width:55vw!important;height:11vw}
   .carousel-card{flex:0 0 210px;min-width:210px}
-  .carousel-card:hover{flex:0 0 360px;min-width:360px}
-  .portfolio-carousel-container{width:95vw}
+  .portfolio-carousel-container{width:100vw;margin-left:-2rem;margin-right:-2rem}
 }
 
 @media(max-width:600px){
@@ -667,7 +657,6 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
   .expanded-portfolio .menu-pill{width:40vw;height:11vw}
   .expanded-contact .menu-circle-contact{width:45vw!important;height:11vw}
   .carousel-card{flex:0 0 auto;min-width:0;width:100%;height:auto;border-radius:12px;background:transparent;overflow:visible;transition:none}
-  .carousel-card:hover{flex:0 0 auto;min-width:0}
   .carousel-card img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;border-radius:12px 12px 0 0}
   .carousel-card-overlay{display:none}
   .carousel-card-title{position:static;opacity:1;color:var(--black);background:var(--white);text-align:left;padding:.9rem 1rem .4rem;font-size:1.05rem;letter-spacing:.04em}

@@ -112,6 +112,9 @@
     lightbox: { project: null, index: 0 }
   };
 
+  // Activar scroll infinito: cambiar a true
+  var LOOP_SCROLL = true;
+
   function buildCarousel() {
     var track = document.getElementById("carousel-track");
     projects.forEach(function (p, i) {
@@ -119,7 +122,7 @@
       card.className = "carousel-card";
       card.setAttribute("data-index", i);
       card.innerHTML =
-        '<img src="' + p.thumbnail + '" alt="' + p.title + '" loading="lazy">' +
+        '<img src="' + p.thumbnail + '" alt="' + p.title + '">' +
         '<div class="carousel-card-title">' + p.title + '</div>' +
         '<div class="card-meta">' +
           '<span class="card-category">' + p.category + '</span>' +
@@ -272,6 +275,7 @@
     var word = item.querySelector("[data-action='portfolio']");
     var track = document.getElementById("carousel-track");
     var dot = document.querySelector("[data-portfolio-dot]");
+    var mouseOverTrack = false;
 
     word.addEventListener("click", function (e) {
       if (e.target.closest(".carousel-card")) return;
@@ -290,6 +294,7 @@
     });
 
     track.addEventListener("scroll", function () {
+      if (mouseOverTrack) return;
       if (!dot) return;
       var pill = document.querySelector("[data-portfolio-pill]");
       if (!pill) return;
@@ -298,19 +303,99 @@
       var maxScroll = track.scrollWidth - track.clientWidth;
       if (maxScroll <= 0) return;
       var ratio = track.scrollLeft / maxScroll;
-      var trackPadding = dotSize;
-      var usableWidth = pillRect.width - dotSize - trackPadding;
-      var leftPos = (trackPadding / 2) + ratio * usableWidth;
-      var leftPercent = (leftPos / pillRect.width) * 100;
-      dot.style.left = leftPercent + "%";
+      var minLeft = (dotSize / 2 / pillRect.width) * 100;
+      var maxLeft = 100 - minLeft;
+      dot.style.left = (minLeft + ratio * (maxLeft - minLeft)) + "%";
     });
 
-    track.addEventListener("wheel", function (e) {
-      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-        e.preventDefault();
-        track.scrollLeft += e.deltaY;
-      }
-    }, { passive: false });
+    if (!window.matchMedia("(hover: none)").matches) {
+      var lastMouseX = null;
+      var lastMouseY = null;
+
+      var gap = parseFloat(getComputedStyle(track).gap) || 20;
+
+      setInterval(function () {
+        if (lastMouseX === null) return;
+        var rect = track.getBoundingClientRect();
+        if (lastMouseX < rect.left || lastMouseX > rect.right) return;
+        if (lastMouseY < rect.top || lastMouseY > rect.bottom) return;
+
+        var ratio = (lastMouseX - rect.left) / rect.width;
+        var speed = 0;
+
+        if (ratio < 0.4) {
+          var intensity = (0.4 - ratio) / 0.4;
+          speed = -10 * intensity * intensity;
+        } else if (ratio > 0.6) {
+          var intensity = (ratio - 0.6) / 0.4;
+          speed = 10 * intensity * intensity;
+        }
+
+        var maxScroll = track.scrollWidth - track.clientWidth;
+        if (speed !== 0 && maxScroll > 0) {
+          var next = track.scrollLeft + speed;
+          if (!LOOP_SCROLL) {
+            if (next < 0) next = 0;
+            if (next > maxScroll) next = maxScroll;
+          }
+          track.scrollLeft = next;
+        }
+
+        if (LOOP_SCROLL && speed !== 0) {
+          var cards = track.children;
+          var safe = 12;
+          if (speed > 0) {
+            while (safe-- > 0 && cards.length > 0) {
+              var first = cards[0];
+              if (first.offsetLeft + first.offsetWidth <= track.scrollLeft) {
+                track.appendChild(first);
+                track.scrollLeft -= (first.offsetWidth + gap);
+              } else {
+                break;
+              }
+            }
+          } else {
+            while (safe-- > 0 && cards.length > 0) {
+              var last = cards[cards.length - 1];
+              if (last.offsetLeft >= track.scrollLeft + track.clientWidth) {
+                track.insertBefore(last, cards[0]);
+                track.scrollLeft += (last.offsetWidth + gap);
+              } else {
+                break;
+              }
+            }
+          }
+        }
+      }, 16);
+
+      item.addEventListener("mousemove", function (e) {
+        mouseOverTrack = true;
+        lastMouseX = e.clientX;
+        lastMouseY = e.clientY;
+
+        var trackRect = track.getBoundingClientRect();
+        if (e.clientX < trackRect.left || e.clientX > trackRect.right) return;
+        if (e.clientY < trackRect.top || e.clientY > trackRect.bottom) return;
+
+        var pill = document.querySelector("[data-portfolio-pill]");
+        if (!pill || !dot) return;
+        var pillRect = pill.getBoundingClientRect();
+        var dotSize = dot.getBoundingClientRect().width;
+
+        var ratio = (e.clientX - trackRect.left) / trackRect.width;
+        var minLeft = (dotSize / 2 / pillRect.width) * 100;
+        var maxLeft = 100 - minLeft;
+        var dotLeft = minLeft + ratio * (maxLeft - minLeft);
+        dot.style.left = dotLeft + "%";
+      });
+
+      item.addEventListener("mouseleave", function () {
+        mouseOverTrack = false;
+        lastMouseX = null;
+        lastMouseY = null;
+        if (dot) dot.style.left = "50%";
+      });
+    }
   }
 
   function initContact() {
