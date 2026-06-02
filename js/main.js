@@ -1,5 +1,6 @@
 (function () {
-  var projects = [
+  var projects = [];
+  var fallbackProjects = [
     {
       title: "Boss Demon — Zombie Survival",
       category: "3D",
@@ -104,6 +105,8 @@
       ]
     }
   ];
+
+  var stopPortfolioScroll = function () {};
 
   var state = {
     about: false,
@@ -273,6 +276,7 @@
         closeOtherSections('about');
         state.about = true;
         item.classList.add("expanded-about");
+        document.body.classList.add('has-expanded');
         timeout = setTimeout(function () {
           item.scrollIntoView({ behavior: "smooth", block: "start" });
         }, needsWait ? 800 : SCROLL_DELAY);
@@ -294,6 +298,7 @@
       clearTimeout(timeout);
       var wasOpen = state.portfolio;
       if (wasOpen) {
+        stopScroll();
         closeAllSections();
         timeout = setTimeout(function () {
           document.querySelector('.menu').scrollIntoView({ behavior: "smooth", block: "start" });
@@ -303,7 +308,9 @@
         closeOtherSections('portfolio');
         state.portfolio = true;
         item.classList.add("expanded-portfolio");
+        document.body.classList.add('has-expanded');
         if (window.matchMedia("(min-width: 601px)").matches) {
+          startScroll();
           timeout = setTimeout(function () {
             item.scrollIntoView({ behavior: "smooth", block: "start" });
           }, needsWait ? 800 : SCROLL_DELAY);
@@ -326,13 +333,18 @@
       dot.style.left = (minLeft + ratio * (maxLeft - minLeft)) + "%";
     });
 
+    var intervalId = null;
+    var startScroll = function () {};
+    var stopScroll = function () {};
+    var tickScroll = function () {};
+
     if (!window.matchMedia("(hover: none)").matches) {
       var lastMouseX = null;
       var lastMouseY = null;
 
       var gap = parseFloat(getComputedStyle(track).gap) || 20;
 
-      setInterval(function () {
+      tickScroll = function () {
         if (lastMouseX === null) return;
         var rect = track.getBoundingClientRect();
         if (lastMouseX < rect.left || lastMouseX > rect.right) return;
@@ -384,7 +396,19 @@
             }
           }
         }
-      }, 16);
+      };
+
+      startScroll = function () {
+        if (intervalId) return;
+        intervalId = setInterval(tickScroll, 16);
+      };
+
+      stopScroll = function () {
+        clearInterval(intervalId);
+        intervalId = null;
+      };
+
+      stopPortfolioScroll = stopScroll;
 
       item.addEventListener("mousemove", function (e) {
         mouseOverTrack = true;
@@ -435,6 +459,7 @@
         closeOtherSections('contact');
         state.contact = true;
         item.classList.add("expanded-contact");
+        document.body.classList.add('has-expanded');
         timeout = setTimeout(function () {
           item.scrollIntoView({ behavior: "smooth", block: "start" });
         }, needsWait ? 800 : SCROLL_DELAY);
@@ -444,12 +469,15 @@
 
   function closeOtherSections(skip) {
     if (skip !== 'about') { state.about = false; document.getElementById("menu-about").classList.remove("expanded-about"); }
-    if (skip !== 'portfolio') { state.portfolio = false; document.getElementById("menu-portfolio").classList.remove("expanded-portfolio"); }
+    if (skip !== 'portfolio') { state.portfolio = false; document.getElementById("menu-portfolio").classList.remove("expanded-portfolio"); stopPortfolioScroll(); }
     if (skip !== 'contact') { state.contact = false; document.getElementById("menu-contact").classList.remove("expanded-contact"); }
   }
 
   function closeAllSections() {
     closeOtherSections(null);
+    if (!document.querySelector('.expanded-about, .expanded-portfolio, .expanded-contact')) {
+      document.body.classList.remove('has-expanded');
+    }
   }
 
   function openLightbox(i) {
@@ -539,14 +567,33 @@
     });
   }
 
+  function loadProjects(callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "projects.json");
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        try {
+          var data = JSON.parse(xhr.responseText);
+          if (Array.isArray(data) && data.length) { callback(data); return; }
+        } catch (e) {}
+      }
+      callback(null);
+    };
+    xhr.onerror = function () { callback(null); };
+    xhr.send();
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
-    buildCarousel();
-    initCursorGlow();
-    initHeroEyes();
-    initAbout();
-    initPortfolio();
-    initContact();
-    initLightbox();
-    initSmoothScroll();
+    loadProjects(function (data) {
+      projects = data || fallbackProjects;
+      buildCarousel();
+      initCursorGlow();
+      initHeroEyes();
+      initAbout();
+      initPortfolio();
+      initContact();
+      initLightbox();
+      initSmoothScroll();
+    });
   });
 })();
