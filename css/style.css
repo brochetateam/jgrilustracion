@@ -316,8 +316,8 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
 
 .carousel-track{
   display:flex;
-  gap:12px;
-  height:50vh;
+  gap:20px;
+  height:66vh;
   overflow-x:auto;
   overflow-y:hidden;
   scroll-snap-type:x mandatory;
@@ -330,8 +330,8 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
 .carousel-track::-webkit-scrollbar{display:none}
 
 .carousel-card{
-  flex:0 0 180px;
-  min-width:180px;
+  flex:0 0 270px;
+  min-width:270px;
   height:100%;
   border-radius:9999px;
   overflow:hidden;
@@ -343,8 +343,8 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
 }
 
 .carousel-card:hover{
-  flex:0 0 300px;
-  min-width:300px;
+  flex:0 0 450px;
+  min-width:450px;
 }
 
 .carousel-card img{
@@ -612,8 +612,8 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
   .expanded-about .menu-circle[data-circle="about"]{width:45vw;height:45vw}
   .expanded-portfolio .menu-pill{width:35vw;height:11vw}
   .expanded-contact .menu-circle-contact{width:55vw!important;height:11vw}
-  .carousel-card{flex:0 0 140px;min-width:140px}
-  .carousel-card:hover{flex:0 0 240px;min-width:240px}
+  .carousel-card{flex:0 0 210px;min-width:210px}
+  .carousel-card:hover{flex:0 0 360px;min-width:360px}
   .portfolio-carousel-container{width:95vw}
 }
 
@@ -626,8 +626,8 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
   .about-content{font-size:.7rem;line-height:1.4;padding:10% 8%;gap:.4em}
   .expanded-portfolio .menu-pill{width:40vw;height:11vw}
   .expanded-contact .menu-circle-contact{width:70vw!important;height:11vw}
-  .carousel-card{flex:0 0 110px;min-width:110px}
-  .carousel-card:hover{flex:0 0 180px;min-width:180px}
+  .carousel-card{flex:0 0 165px;min-width:165px}
+  .carousel-card:hover{flex:0 0 270px;min-width:270px}
   .carousel-track{height:40vh}
   .portfolio-carousel-container{width:98vw}
   .lightbox{padding:1rem}
