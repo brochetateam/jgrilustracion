@@ -130,69 +130,79 @@
     });
   }
 
-  function initCursorGlow() {
-    document.addEventListener("mousemove", function (e) {
-      document.body.style.background =
-        "radial-gradient(600px circle at " + e.clientX + "px " + e.clientY + "px, rgba(255,255,255,0.06), transparent 40%), #F8CB74";
-    });
-  }
+  function initCursorGlow() {}
 
   function initHeroEyes() {
     var heroEyes = document.querySelectorAll('.hero-circle');
+    var mouseX = window.innerWidth / 2;
+    var mouseY = window.innerHeight / 2;
+    var mouseActive = false;
 
     document.addEventListener('mousemove', function (e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      mouseActive = true;
+    });
+
+    document.addEventListener('mouseleave', function () {
+      mouseActive = false;
+    });
+
+    function smoothstep(t) {
+      return t * t * (3 - 2 * t);
+    }
+
+    function updateEyes() {
       heroEyes.forEach(function (eye) {
         var rect = eye.getBoundingClientRect();
         var eyeCenterX = rect.left + rect.width / 2;
         var eyeCenterY = rect.top + rect.height / 2;
-        var dx = e.clientX - eyeCenterX;
-        var dy = e.clientY - eyeCenterY;
+        var dx = mouseX - eyeCenterX;
+        var dy = mouseY - eyeCenterY;
         var distance = Math.sqrt(dx * dx + dy * dy);
 
         var pupil = eye.querySelector('.hero-pupil');
         if (!pupil) return;
 
-        var maxDist = 600;
+        var maxDist = 700;
         var ratio = Math.min(distance / maxDist, 1);
-        var pupilSize = 25 + ratio * 40;
+        var pupilSize = 32 + ratio * 33;
         pupil.style.width = pupilSize + '%';
         pupil.style.height = pupilSize + '%';
 
         var maxOffset = rect.width * 0.15;
         var angle = Math.atan2(dy, dx);
-        var offsetDist = Math.min(distance * 0.05, maxOffset);
+        var offsetDist = Math.min(distance * 0.04, maxOffset);
         var offsetX = Math.cos(angle) * offsetDist;
         var offsetY = Math.sin(angle) * offsetDist;
         pupil.style.left = 'calc(50% + ' + offsetX + 'px)';
         pupil.style.top = 'calc(50% + ' + offsetY + 'px)';
+
+        var closeRadius = rect.width * 0.75;
+        var closeT = mouseActive ? Math.max(0, 1 - distance / closeRadius) : 0;
+        closeT = smoothstep(closeT);
+        var scaleY = 1 - closeT * 0.95;
+        eye.style.transform = 'scaleY(' + scaleY.toFixed(3) + ')';
       });
-    });
+
+      requestAnimationFrame(updateEyes);
+    }
+    requestAnimationFrame(updateEyes);
 
     function blinkEyes() {
       heroEyes.forEach(function (eye) {
-        if (!eye.classList.contains('eye-hover-closed')) {
+        var match = (eye.style.transform || '').match(/scaleY\(([^)]+)\)/);
+        var baseScaleY = match ? parseFloat(match[1]) : 1;
+        if (baseScaleY > 0.5) {
           eye.style.transform = 'scaleY(0.05)';
           setTimeout(function () {
-            if (!eye.classList.contains('eye-hover-closed')) {
-              eye.style.transform = 'scaleY(1)';
-            }
+            eye.style.transform = 'scaleY(' + baseScaleY.toFixed(3) + ')';
           }, 150);
         }
       });
       setTimeout(blinkEyes, 3000 + Math.random() * 2000);
     }
     setTimeout(blinkEyes, 2000);
-
-    heroEyes.forEach(function (eye) {
-      eye.addEventListener('mouseenter', function () {
-        eye.classList.add('eye-hover-closed');
-        eye.style.transform = 'scaleY(0.05)';
-      });
-      eye.addEventListener('mouseleave', function () {
-        eye.classList.remove('eye-hover-closed');
-        eye.style.transform = 'scaleY(1)';
-      });
-    });
   }
 
   function initAbout() {
@@ -201,11 +211,14 @@
 
     word.addEventListener("click", function (e) {
       e.stopPropagation();
-      state.about = !state.about;
-      if (state.about) {
+      var wasOpen = state.about;
+      closeAllSections();
+      if (!wasOpen) {
+        state.about = true;
         item.classList.add("expanded-about");
-      } else {
-        item.classList.remove("expanded-about");
+        setTimeout(function () {
+          item.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 750);
       }
     });
   }
@@ -219,14 +232,14 @@
     word.addEventListener("click", function (e) {
       if (e.target.closest(".carousel-card")) return;
       e.stopPropagation();
-      state.portfolio = !state.portfolio;
-      if (state.portfolio) {
+      var wasOpen = state.portfolio;
+      closeAllSections();
+      if (!wasOpen) {
+        state.portfolio = true;
         item.classList.add("expanded-portfolio");
         setTimeout(function () {
-          document.getElementById('menu-portfolio').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 100);
-      } else {
-        item.classList.remove("expanded-portfolio");
+          item.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 750);
       }
     });
 
@@ -260,13 +273,25 @@
 
     word.addEventListener("click", function (e) {
       e.stopPropagation();
-      state.contact = !state.contact;
-      if (state.contact) {
+      var wasOpen = state.contact;
+      closeAllSections();
+      if (!wasOpen) {
+        state.contact = true;
         item.classList.add("expanded-contact");
-      } else {
-        item.classList.remove("expanded-contact");
+        setTimeout(function () {
+          item.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 750);
       }
     });
+  }
+
+  function closeAllSections() {
+    state.about = false;
+    state.portfolio = false;
+    state.contact = false;
+    document.getElementById("menu-about").classList.remove("expanded-about");
+    document.getElementById("menu-portfolio").classList.remove("expanded-portfolio");
+    document.getElementById("menu-contact").classList.remove("expanded-contact");
   }
 
   function openLightbox(i) {
