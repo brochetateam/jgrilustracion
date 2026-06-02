@@ -218,7 +218,7 @@
         item.classList.add("expanded-about");
         setTimeout(function () {
           item.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 750);
+        }, 300);
       }
     });
   }
