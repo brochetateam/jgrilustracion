@@ -138,75 +138,115 @@
 
   function initHeroEyes() {
     var heroEyes = document.querySelectorAll('.hero-circle');
-    var mouseX = window.innerWidth / 2;
-    var mouseY = window.innerHeight / 2;
-    var mouseActive = false;
-
-    document.addEventListener('mousemove', function (e) {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      mouseActive = true;
-    });
-
-    document.addEventListener('mouseleave', function () {
-      mouseActive = false;
-    });
+    var isTouch = window.matchMedia('(hover: none)').matches;
 
     function smoothstep(t) {
       return t * t * (3 - 2 * t);
     }
 
-    function updateEyes() {
-      heroEyes.forEach(function (eye) {
-        var rect = eye.getBoundingClientRect();
-        var eyeCenterX = rect.left + rect.width / 2;
-        var eyeCenterY = rect.top + rect.height / 2;
-        var dx = mouseX - eyeCenterX;
-        var dy = mouseY - eyeCenterY;
-        var distance = Math.sqrt(dx * dx + dy * dy);
+    if (isTouch) {
+      initMobileEyes(heroEyes);
+    } else {
+      initDesktopEyes(heroEyes);
+    }
 
-        var pupil = eye.querySelector('.hero-pupil');
-        if (!pupil) return;
+    function initDesktopEyes(heroEyes) {
+      var mouseX = window.innerWidth / 2;
+      var mouseY = window.innerHeight / 2;
+      var mouseActive = false;
+      var isBlinking = false;
 
-        var maxDist = 700;
-        var ratio = Math.min(distance / maxDist, 1);
-        var pupilSize = 32 + ratio * 33;
-        pupil.style.width = pupilSize + '%';
-        pupil.style.height = pupilSize + '%';
-
-        var maxOffset = rect.width * 0.15;
-        var angle = Math.atan2(dy, dx);
-        var offsetDist = Math.min(distance * 0.04, maxOffset);
-        var offsetX = Math.cos(angle) * offsetDist;
-        var offsetY = Math.sin(angle) * offsetDist;
-        pupil.style.left = 'calc(50% + ' + offsetX + 'px)';
-        pupil.style.top = 'calc(50% + ' + offsetY + 'px)';
-
-        var closeRadius = rect.width * 0.75;
-        var closeT = mouseActive ? Math.max(0, 1 - distance / closeRadius) : 0;
-        closeT = smoothstep(closeT);
-        var scaleY = 1 - closeT * 0.95;
-        eye.style.transform = 'scaleY(' + scaleY.toFixed(3) + ')';
+      document.addEventListener('mousemove', function (e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        mouseActive = true;
       });
 
+      document.addEventListener('mouseleave', function () {
+        mouseActive = false;
+      });
+
+      function updateEyes() {
+        heroEyes.forEach(function (eye) {
+          var rect = eye.getBoundingClientRect();
+          var eyeCenterX = rect.left + rect.width / 2;
+          var eyeCenterY = rect.top + rect.height / 2;
+          var dx = mouseX - eyeCenterX;
+          var dy = mouseY - eyeCenterY;
+          var distance = Math.sqrt(dx * dx + dy * dy);
+
+          var pupil = eye.querySelector('.hero-pupil');
+          if (!pupil) return;
+
+          var maxDist = 700;
+          var ratio = Math.min(distance / maxDist, 1);
+          var pupilSize = 32 + ratio * 33;
+          pupil.style.width = pupilSize + '%';
+          pupil.style.height = pupilSize + '%';
+
+          var maxOffset = rect.width * 0.15;
+          var angle = Math.atan2(dy, dx);
+          var offsetDist = Math.min(distance * 0.04, maxOffset);
+          var offsetX = Math.cos(angle) * offsetDist;
+          var offsetY = Math.sin(angle) * offsetDist;
+          pupil.style.left = 'calc(50% + ' + offsetX + 'px)';
+          pupil.style.top = 'calc(50% + ' + offsetY + 'px)';
+
+          if (!isBlinking) {
+            var closeRadius = rect.width * 0.75;
+            var closeT = mouseActive ? Math.max(0, 1 - distance / closeRadius) : 0;
+            closeT = smoothstep(closeT);
+            eye.style.setProperty('--shutter', closeT.toFixed(3));
+          }
+        });
+
+        requestAnimationFrame(updateEyes);
+      }
       requestAnimationFrame(updateEyes);
-    }
-    requestAnimationFrame(updateEyes);
 
-    function blinkEyes() {
-      heroEyes.forEach(function (eye) {
-        var match = (eye.style.transform || '').match(/scaleY\(([^)]+)\)/);
-        var baseScaleY = match ? parseFloat(match[1]) : 1;
-        if (baseScaleY > 0.5) {
-          eye.style.transform = 'scaleY(0.05)';
-          setTimeout(function () {
-            eye.style.transform = 'scaleY(' + baseScaleY.toFixed(3) + ')';
-          }, 150);
-        }
-      });
-      setTimeout(blinkEyes, 3000 + Math.random() * 2000);
+      function blinkEyes() {
+        isBlinking = true;
+        heroEyes.forEach(function (eye) {
+          eye.style.setProperty('--shutter', '1');
+        });
+        setTimeout(function () {
+          heroEyes.forEach(function (eye) {
+            eye.style.setProperty('--shutter', '0');
+          });
+          isBlinking = false;
+        }, 150);
+        setTimeout(blinkEyes, 3000 + Math.random() * 2000);
+      }
+      setTimeout(blinkEyes, 2000);
     }
-    setTimeout(blinkEyes, 2000);
+
+    function initMobileEyes(heroEyes) {
+      function pupilBlink() {
+        heroEyes.forEach(function (eye) {
+          var pupil = eye.querySelector('.hero-pupil');
+          if (!pupil) return;
+          pupil.style.opacity = '0';
+          setTimeout(function () {
+            pupil.style.opacity = '1';
+          }, 120);
+        });
+        setTimeout(pupilBlink, 3000 + Math.random() * 2000);
+      }
+      setTimeout(pupilBlink, 2000);
+
+      function bigBlink() {
+        heroEyes.forEach(function (eye) {
+          eye.style.setProperty('--shutter', '1');
+        });
+        setTimeout(function () {
+          heroEyes.forEach(function (eye) {
+            eye.style.setProperty('--shutter', '0');
+          });
+        }, 300);
+        setTimeout(bigBlink, 8000 + Math.random() * 7000);
+      }
+      setTimeout(bigBlink, 5000);
+    }
   }
 
   function initAbout() {

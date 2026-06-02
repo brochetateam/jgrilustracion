@@ -75,7 +75,33 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
   justify-content:center;
   position:relative;
   margin:0 .3vw;
-  will-change:transform;
+  overflow:hidden;
+  --shutter:0;
+}
+
+.hero-circle::before,
+.hero-circle::after{
+  content:'';
+  position:absolute;
+  left:0;
+  right:0;
+  height:50%;
+  background:var(--bg);
+  z-index:2;
+  pointer-events:none;
+  transition:transform .25s var(--ease);
+}
+
+.hero-circle::before{
+  top:0;
+  transform:scaleY(var(--shutter));
+  transform-origin:top;
+}
+
+.hero-circle::after{
+  bottom:0;
+  transform:scaleY(var(--shutter));
+  transform-origin:bottom;
 }
 
 .hero-pupil{
@@ -88,6 +114,8 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
   top:50%;
   transform:translate(-50%,-50%);
   will-change:width,height;
+  z-index:1;
+  transition:opacity .1s linear;
 }
 
 .marquee-bar{
