@@ -114,6 +114,8 @@
 
   // Activar scroll infinito: cambiar a true
   var LOOP_SCROLL = true;
+  // Delay del scroll al abrir sección (ms)
+  var SCROLL_DELAY = 300;
 
   function buildCarousel() {
     var track = document.getElementById("carousel-track");
@@ -255,17 +257,25 @@
   function initAbout() {
     var item = document.getElementById("menu-about");
     var word = item.querySelector("[data-action='about']");
+    var timeout = null;
 
     word.addEventListener("click", function (e) {
       e.stopPropagation();
+      clearTimeout(timeout);
       var wasOpen = state.about;
-      closeAllSections();
-      if (!wasOpen) {
+      if (wasOpen) {
+        closeAllSections();
+        timeout = setTimeout(function () {
+          document.querySelector('.menu').scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 800);
+      } else {
+        var needsWait = state.portfolio || state.contact;
+        closeOtherSections('about');
         state.about = true;
         item.classList.add("expanded-about");
-        setTimeout(function () {
+        timeout = setTimeout(function () {
           item.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 300);
+        }, needsWait ? 800 : SCROLL_DELAY);
       }
     });
   }
@@ -276,19 +286,27 @@
     var track = document.getElementById("carousel-track");
     var dot = document.querySelector("[data-portfolio-dot]");
     var mouseOverTrack = false;
+    var timeout = null;
 
     word.addEventListener("click", function (e) {
       if (e.target.closest(".carousel-card")) return;
       e.stopPropagation();
+      clearTimeout(timeout);
       var wasOpen = state.portfolio;
-      closeAllSections();
-      if (!wasOpen) {
+      if (wasOpen) {
+        closeAllSections();
+        timeout = setTimeout(function () {
+          document.querySelector('.menu').scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 800);
+      } else {
+        var needsWait = state.about || state.contact;
+        closeOtherSections('portfolio');
         state.portfolio = true;
         item.classList.add("expanded-portfolio");
         if (window.matchMedia("(min-width: 601px)").matches) {
-          setTimeout(function () {
+          timeout = setTimeout(function () {
             item.scrollIntoView({ behavior: "smooth", block: "start" });
-          }, 750);
+          }, needsWait ? 800 : SCROLL_DELAY);
         }
       }
     });
@@ -401,28 +419,37 @@
   function initContact() {
     var item = document.getElementById("menu-contact");
     var word = item.querySelector("[data-action='contact']");
+    var timeout = null;
 
     word.addEventListener("click", function (e) {
       e.stopPropagation();
+      clearTimeout(timeout);
       var wasOpen = state.contact;
-      closeAllSections();
-      if (!wasOpen) {
+      if (wasOpen) {
+        closeAllSections();
+        timeout = setTimeout(function () {
+          document.querySelector('.menu').scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 800);
+      } else {
+        var needsWait = state.about || state.portfolio;
+        closeOtherSections('contact');
         state.contact = true;
         item.classList.add("expanded-contact");
-        setTimeout(function () {
+        timeout = setTimeout(function () {
           item.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 750);
+        }, needsWait ? 800 : SCROLL_DELAY);
       }
     });
   }
 
+  function closeOtherSections(skip) {
+    if (skip !== 'about') { state.about = false; document.getElementById("menu-about").classList.remove("expanded-about"); }
+    if (skip !== 'portfolio') { state.portfolio = false; document.getElementById("menu-portfolio").classList.remove("expanded-portfolio"); }
+    if (skip !== 'contact') { state.contact = false; document.getElementById("menu-contact").classList.remove("expanded-contact"); }
+  }
+
   function closeAllSections() {
-    state.about = false;
-    state.portfolio = false;
-    state.contact = false;
-    document.getElementById("menu-about").classList.remove("expanded-about");
-    document.getElementById("menu-portfolio").classList.remove("expanded-portfolio");
-    document.getElementById("menu-contact").classList.remove("expanded-contact");
+    closeOtherSections(null);
   }
 
   function openLightbox(i) {

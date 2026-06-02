@@ -169,8 +169,8 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  padding:6vh 2rem;
-  gap:2vh;
+  padding:3vh 2rem;
+  gap:1.5vh;
 }
 
 .menu-item{
@@ -203,7 +203,7 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
 
 .menu-word>span{
   font-family:var(--font-heading);
-  font-size:13vw;
+  font-size:11vw;
   font-weight:700;
   text-transform:uppercase;
   color:var(--black);
@@ -469,7 +469,7 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
   display:flex;
   justify-content:center;
   gap:1.8rem;
-  margin-top:3vh;
+  margin-top:1.5vh;
 }
 
 .social-link{
@@ -487,7 +487,7 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
 }
 
 .footer{
-  margin-top:4vh;
+  margin-top:1.5vh;
   text-align:center;
   font-size:.8rem;
   opacity:.5;
@@ -650,7 +650,7 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
     padding:5vh 1rem 3vh;
     gap:1.2vh;
   }
-  .menu-word>span{font-size:13vw}
+  .menu-word>span{font-size:11vw}
   .menu-circle,.menu-circle-contact,.menu-pill{width:10vw;height:10vw}
   .expanded-about .menu-circle[data-circle="about"]{width:55vw;height:55vw}
   .about-content{font-size:.7rem;line-height:1.4;padding:10% 8%;gap:.4em}
