@@ -637,7 +637,7 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
   .expanded-about .menu-circle[data-circle="about"]{width:55vw;height:55vw}
   .about-content{font-size:.7rem;line-height:1.4;padding:10% 8%;gap:.4em}
   .expanded-portfolio .menu-pill{width:40vw;height:11vw}
-  .expanded-contact .menu-circle-contact{width:70vw!important;height:11vw}
+  .expanded-contact .menu-circle-contact{width:45vw!important;height:11vw}
   .carousel-card{flex:0 0 165px;min-width:165px}
   .carousel-card:hover{flex:0 0 270px;min-width:270px}
   .carousel-track{height:40vh}
